@@ -6,10 +6,13 @@ __pycache__/
 # PyInstaller
 *.manifest
 *.spec
-
-release/
+dist
+release
+build
 
 # VSCode
 .vscode
 .venv
 .ipynb
+
+log.log

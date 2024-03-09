@@ -1,4 +1,8 @@
 def parse_properties(file_path: str) -> dict[str, str]:
+    """Parses .properties file with contents in 'key = value' format.
+    
+    Returns a dictionary.
+    """
     properties: dict[str, str] = {}
     with open(file_path, "r") as f:
         for line in f:

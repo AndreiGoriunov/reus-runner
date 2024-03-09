@@ -1,12 +1,12 @@
+import logging
 import sys
 from os import path
 from threading import Lock
 from typing import Any
-import logging
 
 
 def get_root_dir() -> str:
-    """Should only be called from the root."""
+    """Returns a root directory path."""
     if getattr(sys, "frozen", False):
         # The script is running inside a PyInstaller bundle
         print("Running inside a PyInstaller bundle")
@@ -18,12 +18,39 @@ def get_root_dir() -> str:
         return path.dirname(script_path)
 
 
+def config_logger(level: int = logging.INFO, log_file: str | None = None) -> None:
+    """Set up logging."""
+    if not log_file:
+        _log_file: str = GlobalProperties.log_file  # type: ignore
+    else:
+        _log_file: str = log_file
+
+    log_format: str = GlobalProperties.log_format  # type: ignore
+    logging.basicConfig(level=level, format=log_format, filename=_log_file, filemode="a")  # type: ignore
+
+
+def get_cmdline_args_as_dict() -> dict[str, str]:
+    """Parses command line arguments in the format: --key=value.
+
+    Returns a dictionary.
+    """
+    properties: dict[str, str] = {}
+    for arg in sys.argv[1:]:  # Skip the script name
+        if arg.startswith("--"):
+            key_value = arg[2:].split(
+                "=", 1
+            )  # Remove '--' and split by '=', limit split to 1
+            if len(key_value) == 2:
+                key, value = key_value
+                properties[key] = value
+
+    return properties
+
+
 class GlobalProperties:
     _instance = None
     _lock = Lock()
     _is_initialized: bool = False
-
-    properties: dict[str, str] = {}
 
     def __new__(cls):
         with cls._lock:
@@ -52,7 +79,9 @@ class GlobalProperties:
     @classmethod
     def add(cls, key: str, value: Any):
         if " " in key:
-            print(f"Attempt to add key '{key}' with white space. White space will be replaced with '_'.")
+            print(
+                f"Attempt to add key '{key}' with white space. White space will be replaced with '_'."
+            )
             key.replace(" ", "_")
         setattr(cls, key, value)
 
@@ -66,8 +95,3 @@ class GlobalProperties:
         :return: The attribute value if it exists, otherwise the default value.
         """
         return getattr(cls, key, default)
-
-
-def config_logger(level: int = logging.INFO, log_file: str | None = None):
-    if not log_file:
-        log_file = GlobalProperties.log_file  # type: ignore
