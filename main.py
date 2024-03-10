@@ -1,12 +1,8 @@
 import logging
 from os import path
 
-from config import (
-    GlobalProperties,
-    get_root_dir,
-    config_logger,
-    get_cmdline_args_as_dict,
-)
+from config import get_root_dir
+from utilities import GlobalProperties, get_cmdline_args_as_dict, config_logger
 from config_constants import CONFIG_PROPERTIES_PATH
 from utilities import parse_properties
 
