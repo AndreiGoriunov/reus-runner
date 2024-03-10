@@ -1,7 +1,14 @@
 $exeName = "reus-runner.exe"
 
-# Remove dist, build, and release directories
-Remove-Item -Recurse -Force dist, build, release
+# Directories to remove
+$directories = @("dist", "build", "release")
+
+# Remove dist, build, and release directories if they exist
+foreach ($dir in $directories) {
+    if (Test-Path $dir) {
+        Remove-Item -Recurse -Force $dir
+    }
+}
 
 # Remove all __pycache__ directories
 Get-ChildItem -Path . -Filter "__pycache__" -Recurse -Directory | Remove-Item -Force -Recurse

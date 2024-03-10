@@ -1,18 +1,22 @@
 import logging
 from os import path
 
-from config import get_root_dir
-from utilities import GlobalProperties, get_cmdline_args_as_dict, config_logger
-from config_constants import CONFIG_PROPERTIES_PATH
-from utilities import parse_properties
+from reus_runner import (
+    GlobalProperties,
+    config_logger,
+    constants,
+    get_cmdline_args_as_dict,
+    parse_properties,
+    get_root_dir,
+)
 
 
-def reus_init():
+def reus_runner_init():
     root_dir: str = get_root_dir()
 
     cmdline_props: dict[str, str] = get_cmdline_args_as_dict()
     config_props: dict[str, str] = parse_properties(
-        path.join(root_dir, CONFIG_PROPERTIES_PATH)
+        path.join(root_dir, constants.CONFIG_PROPERTIES_PATH)
     )
 
     properties: dict[str, str] = config_props | cmdline_props
@@ -22,11 +26,13 @@ def reus_init():
     config_logger()
     GlobalProperties.root_dir = root_dir  # type: ignore
     logging.info(f"Root directory is set to: '{root_dir}'")
+    print(GlobalProperties.get_all())
 
 
 def main():
-    reus_init()
+    reus_runner_init()
     # Your code goes here
+    input()  # (Optional) Wait for input to close the program
 
 
 if __name__ == "__main__":
