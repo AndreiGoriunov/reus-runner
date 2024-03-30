@@ -1,7 +1,3 @@
-Based on your description, here's a draft for your README that you can adjust or expand as needed:
-
----
-
 # reus-runner: A Python Project Template
 
 ## Overview

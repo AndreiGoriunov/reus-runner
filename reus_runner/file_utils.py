@@ -4,6 +4,10 @@ from os import path
 
 def parse_properties(file_path: str) -> dict[str, str]:
     """Parses .properties file with contents in 'key = value' format.
+    Ignores lines starting with '#'.
+
+    Args:
+        file_path (str): The path to the .properties file.
 
     Returns a dictionary.
     """
@@ -32,7 +36,9 @@ def _find_root_dir(current_dir: str) -> str:
         parent_dir = path.dirname(current_dir)
         if parent_dir == current_dir:
             # Reached the filesystem root without finding a .root file
-            raise FileNotFoundError("Root directory with .root not found. Please ensure the project contains a .root file at the root.")
+            raise FileNotFoundError(
+                "Root directory with .root not found. Please ensure the project contains a .root file at the root."
+            )
         return _find_root_dir(parent_dir)
 
 

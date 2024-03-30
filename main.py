@@ -26,7 +26,6 @@ def reus_runner_init():
     config_logger()
     GlobalProperties.root_dir = root_dir  # type: ignore
     logging.info(f"Root directory is set to: '{root_dir}'")
-    print(GlobalProperties.get_all())
 
 
 def main():
