@@ -1,6 +1,8 @@
 import logging
 import sys
+
 from .global_properties import GlobalProperties
+
 
 def config_logger(level: int = logging.INFO, log_file: str | None = None) -> None:
     """Set up logging."""

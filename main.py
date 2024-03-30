@@ -30,6 +30,7 @@ def reus_runner_init():
 
 def main():
     reus_runner_init()
+    print(GlobalProperties.get_all())
     # Your code goes here
     input()  # (Optional) Wait for input to close the program
 
