@@ -15,4 +15,10 @@ build
 .venv
 .ipynb
 
+# PyCharm
+.idea
+# Default ignored files
+/shelf/
+/workspace.xml
+
 log.log
