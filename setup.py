@@ -9,5 +9,5 @@ setup(
     license="MIT",
     keywords="Python Template Runner",
     url="https://github.com/AndreiGoriunov/reus-runner",
-    entry_points={"console_scripts": ["reus-runner = reus_runner.cli"]},
+    entry_points={"console_scripts": ["reus-runner-create = reus_runner.cli:create"]},
 )
