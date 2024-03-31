@@ -21,4 +21,7 @@ build
 /shelf/
 /workspace.xml
 
-log.log
+
+*.log
+.root
+config.properties
