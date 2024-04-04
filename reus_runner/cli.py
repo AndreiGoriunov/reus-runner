@@ -21,7 +21,7 @@ def create():
         print(f"Failed to create .root file: {e}")
 
     with open("config.properties", "w") as f:
-        f.write(f"log_file_name = {DEFAULT_LOG_FILE_NAME}\n")
-        f.write(f"log_format = \"{DEFAULT_LOG_FORMAT}\"")
+        f.write(f"{DEFAULT_LOG_FILE_NAME}\n")
+        f.write(f"{DEFAULT_LOG_FORMAT}\n")
 
     print("Setup complete. Necessary files have been created.")
