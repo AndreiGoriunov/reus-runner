@@ -1,6 +1,6 @@
 # reus-runner: A Python Project Template
 
-## Overview
+# Overview
 
 `reus-runner` is designed to streamline the setup process for new Python projects by serving as a robust template or
 boilerplate. This repository eliminates the repetitive tasks associated with configuring a new project from scratch. It
@@ -8,7 +8,9 @@ is ideal for Python developers looking to jumpstart their script development wit
 Additionally, `reus-runner` supports packaging Python scripts into executable (.exe) files for easy distribution and
 use.
 
-### Use as Package
+# Quickstart
+
+## Use as Package
 
 ```bash
 pip install git+https://github.com/AndreiGoriunov/reus-runner.git@package
@@ -19,64 +21,81 @@ To create the default necessary files, run `reus-runner-create`. This will creat
 To use the package, import `reus_runner` and run `initialize()`.  After this, you will be able to use `GlobalProperties` to access
 project-specific settings from `config.properties` and command-line arguments.
 
-### Use as Template
+## Use as Template
 
-Download or clone this repository to your local machine to get started. It includes a `main.py` script and a `config.properties` file.
-As well as a `build.ps1` script to package the project into an executable (.exe) file.
+Download the zip or clone this repository's branch `template` to your local machine to get started. 
+It includes a `main.py` script and a `config.properties` file.
+As well as a `build.py` script to package the project into an executable (.exe) file.
 
 ```bash
 git clone https://github.com/AndreiGoriunov/reus-runner.git@template
 ```
 
-## Features
+# CLI Commands
 
-- **Configurable Properties**: Utilizes a `config.properties` file, which is included in the final build as a separate
-  file. This allows for easy modification of settings even after the executable file has been generated.
-- **Command-line Arguments**: Supports passing command-line arguments (`--key=value`) to both the `main.py` script and
-  the generated .exe file. These arguments override and are merged with settings from `config.properties` and are
-  accessible via the `GlobalProperties` singleton.
-- **Execution Context Awareness**: The project can distinguish whether it is being run from a terminal as a Python file
-  or from within a PyInstaller bundle, allowing for context-specific configurations.
-- **GlobalProperties Singleton**: Features a `GlobalProperties` class that, once initialized in `main.py`, facilitates
-  access to configuration settings and command-line arguments across different modules within the project.
+- `reus-runner-create`: Creates the necessary files for the project setup. Asks for user confirmation to create the
+  files. If confirmed, it creates `.root` and `config.properties` files with default log settings.
+- `reus-runner-build`: Creates a template file `build.py` in the current directory. You can use it to build your project
+  into executable. Modify it if needed.
 
-## Getting Started
+# Features
 
-### Prerequisites
+- **Configurable Properties**
+  - Utilizes a `config.properties` file, which is included in the final build as a separate
+    file. This allows for easy modification of settings even after the executable file has been generated.
 
-Ensure you have Python installed on your system.
-This project has been developed and tested with Python 3.12 (though it should work with 3.9+).
-You will also need PyInstaller to bundle the script into an .exe file, if desired.
+- **Command-line Arguments**
+  - Supports passing command-line arguments (`--key=value`) to both the `main.py` script and
+    the generated .exe file. These arguments override and are merged with settings from `config.properties` and are
+    accessible via the `GlobalProperties` singleton.
 
-#### Installation
+- **Execution Context Awareness**
+  - The project can distinguish whether it is being run from a terminal as a Python file
+    or from within a PyInstaller bundle, allowing for context-specific configurations.
 
-1. Clone the repository or download it as a zip file and extract it to your local machine.
+- **GlobalProperties Singleton**
+  - Features a `GlobalProperties` class that, once initialized in `main.py` with `reus_runner.initialize()`, 
+    facilitates access to configuration settings and command-line arguments across different modules within the project.
+  - You can also use `GlobalProperties` as cache for any other data that needs to be shared across modules.
 
-2. If you plan to bundle the project into an executable (.exe) file, install the required dependency by running:
+# Prerequisites
 
-```bash
-pip install -r requirements.txt
-```
+- Python 3.12 (though it should work with 3.9+).
 
-This step installs PyInstaller, which is used for creating the executable. If you do not require an executable version
-of your project, you can skip this step.
+- PyInstaller to bundle the script into an .exe file, if desired.
 
-3. Customize the config.properties file according to your project's needs. This file is crucial for setting up
-   project-specific configurations and can be edited at any time, even after the project has been bundled into an
-   executable.
+  `pip install pyinstaller`
 
-### Usage
+# Usage
 
-To run your Python script:
+1. Run `reus-runner-create` to create the necessary files:
 
-```bash
-python main.py --key=value
-```
+    ```bash
+    reus-runner-create
+    ```
+2. Initialize the project by running `reus_runner.initialize()`.
+    
+    Example:
+    ```python
+    from reus_runner import initialize, GlobalProperties
+    
+    def main():
+        initialize()
+    
+    if __name__ == "__main__":
+        main()
+    ```
 
-To bundle your script into an .exe file, use the provided PowerShell script `build.ps1`. You can change the name of the
-resulting .exe file by changing the `$exeName` vairable in `build.ps1`.
-This script utilizes PyInstaller for packaging. After building, the .exe file and `config.properties` will be available
-in the `release` directory.
+3. (Optional) Run `reus-runner-build` to create the build script (if you are planning to create an executable file):
+
+    ```bash
+    reus-runner-build
+    ```
+
+    To bundle your script into an .exe file, use the created python script `build.py`. You can change the name of the
+    resulting .exe file by changing the `exe_name` variable in `build.py`.
+    This script utilizes PyInstaller for packaging. After building, the .exe file and `config.properties` will be available
+    in the `release` directory.
 
 ## Built-in Functionalities
 
@@ -93,9 +112,5 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Disclaimer
 
-This repository is intended for use as a template for personal projects and not for contributing to `reus-runner`
+This repository is intended for use as a template or as a package with starter utilities for personal projects and not for contributing to `reus-runner`
 itself.
-
----
-
-Feel free to adjust this template to better fit your project's nuances or specific instructions.

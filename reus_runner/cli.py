@@ -1,7 +1,7 @@
 from .constants import BUILD_SCRIPT_PY, DEFAULT_CONFIG_PROPERTIES
 
 
-def create():
+def create() -> None:
     """
     A function to create necessary files for the project setup.
     Asks for user confirmation to create the files.
@@ -29,7 +29,11 @@ def create():
     print("Necessary project files have been created.")
 
 
-def build():
+def build() -> None:
+    """
+    A function to create a template file "build.py" in the current directory.
+    You can use it to build your project into executable. Modify it if needed.
+    """
     confirm: str = input(
         """Reus Runner will create a template file "build.py" in the current directory.
         You can use it to build your project into executable. Modify it if needed.

@@ -3,6 +3,8 @@ from typing import Any
 
 
 class GlobalProperties:
+    """A class that provides global properties for the project."""
+
     _instance = None
     _lock = Lock()
     _is_initialized: bool = False
@@ -35,9 +37,10 @@ class GlobalProperties:
     def add(cls, key: str, value: Any):
         if " " in key:
             print(
-                f"Attempt to add key '{key}' with white space. White space will be replaced with '_'."
+                f'Attempt to add key "{key}" with white space. White space will be replaced with underscore ("_").'
             )
             key.replace(" ", "_")
+            print(f'Saved value under key "{key}".')
         setattr(cls, key, value)
 
     @classmethod
