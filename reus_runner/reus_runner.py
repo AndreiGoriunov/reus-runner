@@ -21,4 +21,5 @@ def initialize():
     GlobalProperties.log_file = path.join(root_dir, GlobalProperties.log_file_name)  # type: ignore
     config_logger()
     GlobalProperties.root_dir = root_dir  # type: ignore
+    logging.info(f"Global properties: {GlobalProperties.get_all()}")
     logging.info(f"Root directory is set to: '{root_dir}'")

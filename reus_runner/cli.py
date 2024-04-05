@@ -1,4 +1,4 @@
-from .constants import DEFAULT_LOG_FILE_NAME, DEFAULT_LOG_FORMAT
+from .constants import BUILD_SCRIPT_PY, DEFAULT_CONFIG_PROPERTIES
 
 
 def create():
@@ -8,20 +8,40 @@ def create():
     If confirmed, it creates .root and config.properties files with default log settings.
     """
     confirm: str = input(
-        "Setup will create 2 necessary files.\n- config.properties\n- .root\n\nCreate the files? (Y/N): "
+        """Reus Runner will create 2 files for your project in the current directory:
+            - config.properties
+            - .root
+            
+        Create the files? (Y/N): """
     )
 
     if confirm.lower() != "y":
         return
 
-    try:
-        with open(".root", "w") as f:
-            f.write("A file marking the root of the project")
-    except Exception as e:
-        print(f"Failed to create .root file: {e}")
+    # Create .root file ===================================================
+    with open(".root", "w") as f:
+        f.write("A file marking the root of the project")
 
+    # Create config.properties file =======================================
     with open("config.properties", "w") as f:
-        f.write(f"{DEFAULT_LOG_FILE_NAME}\n")
-        f.write(f"{DEFAULT_LOG_FORMAT}\n")
+        f.write(f"{DEFAULT_CONFIG_PROPERTIES}")
 
-    print("Setup complete. Necessary files have been created.")
+    print("Necessary project files have been created.")
+
+
+def build():
+    confirm: str = input(
+        """Reus Runner will create a template file "build.py" in the current directory.
+        You can use it to build your project into executable. Modify it if needed.
+        
+        Create the file? (Y/N): """
+    )
+
+    if confirm.lower() != "y":
+        return
+
+    # Create build.py file ================================================
+    with open("build.py", "w") as f:
+        f.write(BUILD_SCRIPT_PY)
+
+    print("File build.py has been created.")
