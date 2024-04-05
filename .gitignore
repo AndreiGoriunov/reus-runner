@@ -21,4 +21,8 @@ build
 /shelf/
 /workspace.xml
 
-log.log
+# Project files
+*.log
+.root
+config.properties
+reus_runner.egg-info

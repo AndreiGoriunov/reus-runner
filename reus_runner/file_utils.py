@@ -18,7 +18,9 @@ def parse_properties(file_path: str) -> dict[str, str]:
             if line and not line.startswith("#"):
                 key, value = line.split("=", 1)
                 value: str = value.strip()
-                if value.startswith('"') and value.endswith('"'):
+                if (value.startswith('"') and value.endswith('"')) or (
+                    value.startswith("'") and value.endswith("'")
+                ):
                     value = value[1:-1]
                 properties[key.strip()] = value
     return properties
