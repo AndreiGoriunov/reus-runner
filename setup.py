@@ -6,7 +6,7 @@ setup(
     packages=find_packages(),
     author="AndreiGoriunov",
     license="MIT",
-    keywords="Python Template Runner",
+    keywords=["Python", "Template", "Starter", "Runner"],
     url="https://github.com/AndreiGoriunov/reus-runner",
     entry_points={
         "console_scripts": [
