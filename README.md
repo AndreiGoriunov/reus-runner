@@ -8,12 +8,14 @@ is ideal for Python developers looking to jumpstart their script development wit
 Additionally, `reus-runner` supports packaging Python scripts into executable (.exe) files for easy distribution and
 use.
 
-# Quickstart
+---
+
+# Quickstart Guide
 
 ## Use as Package
 
 ```bash
-pip install git+https://github.com/AndreiGoriunov/reus-runner.git@package
+pip install git+https://github.com/AndreiGoriunov/reus-runner.git@v1.0.0
 ```
 
 To create the default necessary files, run `reus-runner-create`. This will create the `config.properties` and `.root`.
@@ -96,6 +98,10 @@ git clone https://github.com/AndreiGoriunov/reus-runner.git@template
     resulting .exe file by changing the `exe_name` variable in `build.py`.
     This script utilizes PyInstaller for packaging. After building, the .exe file and `config.properties` will be available
     in the `release` directory.
+
+    ```bash
+    python build.py
+    ```
 
 ## Built-in Functionalities
 
