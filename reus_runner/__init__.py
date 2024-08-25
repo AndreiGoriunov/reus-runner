@@ -19,4 +19,4 @@ https://github.com/AndreiGoriunov/reus-runner
 """
 
 from .global_properties import GlobalProperties
-from .reus_runner import initialize
+from .reus_runner import initialize, get_path_from_root
