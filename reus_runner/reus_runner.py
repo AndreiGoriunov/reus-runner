@@ -13,7 +13,7 @@ def initialize():
     """
     root_dir: str = get_root_dir()
 
-    cmdline_props: dict[str, str] = get_cmdline_args_as_dict()
+    cmdline_props: dict[str, object] = get_cmdline_args_as_dict()
     config_props: dict[str, object] = parse_properties(
         path.join(root_dir, constants.CONFIG_PROPERTIES_PATH)
     )
