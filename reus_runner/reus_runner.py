@@ -14,10 +14,10 @@ def initialize():
     root_dir: str = get_root_dir()
 
     cmdline_props: dict[str, str] = get_cmdline_args_as_dict()
-    config_props: dict[str, str] = parse_properties(
+    config_props: dict[str, object] = parse_properties(
         path.join(root_dir, constants.CONFIG_PROPERTIES_PATH)
     )
-    properties: dict[str, str] = config_props | cmdline_props
+    properties: dict[str, object] = config_props | cmdline_props
 
     GlobalProperties.initialize(properties)
     GlobalProperties.root_dir = root_dir  # type: ignore
@@ -26,3 +26,7 @@ def initialize():
     config_logger()
 
     logging.info(f"Global properties: {GlobalProperties.get_all()}")
+
+
+def get_path_from_root(*paths: str) -> str:
+    return path.join(GlobalProperties.get("root_dir", "./"), *paths)   # type: ignore
