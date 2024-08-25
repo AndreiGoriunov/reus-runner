@@ -1,8 +1,9 @@
 import sys
 from os import path
+from ast import literal_eval
 
 
-def parse_properties(file_path: str) -> dict[str, str]:
+def parse_properties(file_path: str) -> dict[str, object]:
     """Parses .properties file with contents in 'key = value' format.
     Ignores lines starting with '#'.
 
@@ -11,17 +12,19 @@ def parse_properties(file_path: str) -> dict[str, str]:
 
     Returns a dictionary.
     """
-    properties: dict[str, str] = {}
+    properties: dict[str, object] = {}
     with open(file_path, "r") as f:
         for line in f:
             line = line.strip()
             if line and not line.startswith("#"):
                 key, value = line.split("=", 1)
-                value: str = value.strip()
-                if (value.startswith('"') and value.endswith('"')) or (
-                    value.startswith("'") and value.endswith("'")
-                ):
-                    value = value[1:-1]
+                value = value.strip()
+                try:
+                    # Try to evaluate the value as a Python literal
+                    value = literal_eval(value)
+                except (ValueError, SyntaxError):
+                    # If evaluation fails, keep the value as a string
+                    value = value.strip('"').strip("'")
                 properties[key.strip()] = value
     return properties
 
