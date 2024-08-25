@@ -15,7 +15,7 @@ use.
 ## Use as Package
 
 ```bash
-pip install git+https://github.com/AndreiGoriunov/reus-runner.git@v1.0.0
+pip install git+https://github.com/AndreiGoriunov/reus-runner.git@v1.1.0
 ```
 
 To create the default necessary files, run `reus-runner-create`. This will create the `config.properties` and `.root`.
